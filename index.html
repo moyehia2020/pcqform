@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pallet Change Questionnaire - PARATUS</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            background-color: #f4f4f4; 
+            padding: 20px; 
+            color: #333; 
+        }
+        .container { 
+            max-width: 900px; 
+            background: #fff; 
+            margin: auto; 
+            padding: 40px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+        .header { 
+            text-align: center; 
+            border-bottom: 3px solid #d32f2f; 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+        }
+        h1 { 
+            color: #d32f2f; 
+            margin: 0; 
+            letter-spacing: 2px; 
+        }
+        .intro-text {
+            margin-bottom: 20px;
+        }
+        .important-note { 
+            background-color: #fff3f3; 
+            border-left: 5px solid #d32f2f; 
+            padding: 15px; 
+            margin-bottom: 30px; 
+            font-weight: bold; 
+        }
+        .section { 
+            margin-bottom: 30px; 
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        .section-title { 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            margin-bottom: 15px; 
+            display: block; 
+            color: #444; 
+        }
+        .grid-inputs { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
+        .checkbox-group { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 12px; 
+            margin-top: 10px; 
+        }
+        label { 
+            font-size: 14px; 
+            cursor: pointer; 
+        }
+        input[type="text"], input[type="email"], textarea { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            font-family: inherit;
+        }
+        .inline-input {
+            width: 250px !important;
+            display: inline-block !important;
+            margin-left: 10px;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 20px 0; 
+            font-size: 14px; 
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #f9f9f9; 
+            text-align: center;
+        }
+        td.arrow {
+            text-align: center;
+            font-size: 20px;
+            color: #888;
+            background-color: #fafafa;
+        }
+        .contact-info { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            background: #f9f9f9; 
+            padding: 20px; 
+            border-radius: 5px; 
+        }
+        .btn-submit { 
+            background-color: #d32f2f; 
+            color: white; 
+            padding: 15px 40px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 18px; 
+            display: block; 
+            margin: 30px auto 0; 
+            font-weight: bold; 
+            transition: background 0.3s ease;
+        }
+        .btn-submit:hover { 
+            background-color: #b71c1c; 
+        }
+        .hint { 
+            font-size: 13px; 
+            color: #666; 
+            display: block; 
+            margin-bottom: 10px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>PARATUS</h1>
+        <h2>Pallet change questionnaire</h2>
+    </div>
+
+    <p class="intro-text">In order for us to assess your processes thoroughly and provide you with a suitable quote, please complete the following questionnaire carefully and return it to us.</p>
+    
+    <div class="important-note">
+        IMPORTANT: Please also include photos of your pallets, both loaded and unloaded. Thank you.
+    </div>
+
+    <form id="questionnaireForm">
+        
+        <!-- Question 1 -->
+        <div class="section">
+            <span class="section-title">1) Please tell us some details about your pallets, including the load.</span>
+            <div class="grid-inputs">
+                <div>
+                    <label>Total weight (if applicable, from-to):</label>
+                    <input type="text" name="total_weight">
+                </div>
+                <div>
+                    <label>Total height (if applicable, from-to):</label>
+                    <input type="text" name="total_height">
+                </div>
+                <div>
+                    <label>Length (from-to, including any protrusion):</label>
+                    <input type="text" name="length">
+                </div>
+                <div>
+                    <label>Width (from-to, including any protrusion):</label>
+                    <input type="text" name="width">
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="section">
+            <span class="section-title">2) What are your pallets packed with?</span>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="packing" value="cardboard boxes"> cardboard boxes</label>
+                <label><input type="checkbox" name="packing" value="barrels"> barrels</label>
+                <label><input type="checkbox" name="packing" value="bottles"> bottles</label>
+                <label><input type="checkbox" name="packing" value="cans"> cans</label>
+                <label><input type="checkbox" name="packing" value="big packs"> big packs</label>
+                <label><input type="checkbox" name="packing" value="trays"> trays</label>
+                <label><input type="checkbox" name="packing" value="sacks"> sacks</label>
+                <label><input type="checkbox" name="packing" value="octabin"> octabin</label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="section">
+            <span class="section-title">3) Is the load secured to the pallet?</span>
+            <div style="margin-bottom: 8px;">
+                <label><input type="radio" name="secured" value="yes"> yes, through:</label>
+                <input type="text" name="secured_method" class="inline-input">
+            </div>
+            <div style="margin-bottom: 8px;">
+                <label><input type="radio" name="secured" value="no"> no</label>
+            </div>
+            <div>
+                <label><input type="radio" name="secured" value="sometimes"> sometimes</label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="section">
+            <span class="section-title">4) Do you place the load on a base, such as cardboard?</span>
+            <div style="margin-bottom: 8px;">
+                <label><input type="radio" name="base" value="yes"> yes, namely:</label>
+                <input type="text" name="base_details" class="inline-input">
+            </div>
+            <div style="margin-bottom: 8px;">
+                <label><input type="radio" name="base" value="no"> no</label>
+            </div>
+            <div>
+                <label><input type="radio" name="base" value="sometimes"> sometimes</label>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="section">
+            <span class="section-title">5) Are there any specific requirements regarding the pallets, goods or packaging?</span>
+            <textarea name="specific_requirements" rows="3"></textarea>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="section">
+            <span class="section-title">6) Which vehicle do you use?</span>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="vehicle" value="push-master forklift"> push-master forklift</label>
+                <label><input type="checkbox" name="vehicle" value="forklift truck"> forklift truck</label>
+                <label><input type="checkbox" name="vehicle" value="electric pallet truck"> electric pallet truck</label>
+                <label><input type="checkbox" name="vehicle" value="walk-behind pallet truck"> walk-behind pallet truck</label>
+                <label><input type="checkbox" name="vehicle" value="ride-along pallet truck"> ride-along pallet truck</label>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="section">
+            <span class="section-title">7) Which pallet(s) should be repalletised and to which destination pallet(s)?</span>
+            <span class="hint">Please enter the correct dimensions (especially the height) of the pallets without load in millimetres here.</span>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 5%;"></th>
+                        <th style="width: 42.5%;">start pallet</th>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 42.5%;">destination pallet</th>
+                    </tr>
+                </thead>
+                <tbody id="palletTableBody">
+                    <!-- Rows generated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="section">
+            <span class="section-title">8) What material are the pallets made from?</span>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="material" value="wood"> wood</label>
+                <label><input type="checkbox" name="material" value="plastic"> plastic</label>
+                <label><input type="checkbox" name="material" value="pressed wood or cardboard"> pressed wood or cardboard</label>
+                <label><input type="checkbox" name="material" value="metal"> metal (stainless steel, aluminum, steel)</label>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="section">
+            <span class="section-title">9) If you selected 'plastic' in question 8, please provide further details.</span>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="plastic_details" value="enclosed deck"> enclosed deck</label>
+                <label><input type="checkbox" name="plastic_details" value="open deck"> open deck</label>
+                <label><input type="checkbox" name="plastic_details" value="edges on the outside"> edges on the outside</label>
+                <label><input type="checkbox" name="plastic_details" value="locking cam"> locking cam</label>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="section">
+            <span class="section-title">10) Can all start and destination pallets be picked up with an industrial truck in such a way that the cover slats run lengthwise (parallel) to the forks?</span>
+            <label style="margin-right: 20px;"><input type="radio" name="parallel_forks" value="yes"> yes</label>
+            <label><input type="radio" name="parallel_forks" value="no"> no</label>
+        </div>
+
+        <!-- Contact Person -->
+        <div class="section contact-info">
+            <span class="section-title" style="grid-column: 1 / span 2; margin-bottom: 5px;">Contact person</span>
+            <div>
+                <label>Name:</label>
+                <input type="text" name="contact_name" required>
+            </div>
+            <div>
+                <label>Company:</label>
+                <input type="text" name="contact_company">
+            </div>
+            <div>
+                <label>E-Mail:</label>
+                <input type="email" name="contact_email" required>
+            </div>
+            <div>
+                <label>Phone:</label>
+                <input type="text" name="contact_phone">
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Questionnaire</button>
+    </form>
+</div>
+
+<script>
+    // Generate the 6 rows for the pallets table
+    document.addEventListener("DOMContentLoaded", function() {
+        const tableBody = document.getElementById('palletTableBody');
+        let rowsHtml = '';
+        
+        for (let i = 1; i <= 6; i++) {
+            rowsHtml += `
+                <tr>
+                    <td style="text-align: right;">${i})</td>
+                    <td><input type="text" name="start_pallet_${i}"></td>
+                    <td class="arrow">»</td>
+                    <td><input type="text" name="dest_pallet_${i}"></td>
+                </tr>
+            `;
+        }
+        tableBody.innerHTML = rowsHtml;
+    });
+
+    // Handle form submission and format Email
+    document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        let body = "New Pallet Change Questionnaire Submission\n";
+        body += "=========================================\n\n";
+
+        // Contact Information
+        body += "--- Contact Information ---\n";
+        body += "Name: " + (formData.get('contact_name') || 'N/A') + "\n";
+        body += "Company: " + (formData.get('contact_company') || 'N/A') + "\n";
+        body += "Email: " + (formData.get('contact_email') || 'N/A') + "\n";
+        body += "Phone: " + (formData.get('contact_phone') || 'N/A') + "\n\n";
+
+        // Q1: Pallet Details
+        body += "--- 1) Pallet Details ---\n";
+        body += "Total Weight: " + (formData.get('total_weight') || 'N/A') + "\n";
+        body += "Total Height: " + (formData.get('total_height') || 'N/A') + "\n";
+        body += "Length: " + (formData.get('length') || 'N/A') + "\n";
+        body += "Width: " + (formData.get('width') || 'N/A') + "\n\n";
+
+        // Q2: Packing
+        body += "--- 2) Packed with ---\n";
+        body += "Items: " + (formData.getAll('packing').join(', ') || 'None') + "\n\n";
+
+        // Q3: Secured
+        body += "--- 3) Is load secured? ---\n";
+        let secured = formData.get('secured');
+        if (secured === 'yes') {
+            body += "Yes, through: " + formData.get('secured_method') + "\n\n";
+        } else {
+            body += "Status: " + (secured || 'N/A') + "\n\n";
+        }
+
+        // Q4: Base
+        body += "--- 4) Base material ---\n";
+        let base = formData.get('base');
+        if (base === 'yes') {
+            body += "Yes, namely: " + formData.get('base_details') + "\n\n";
+        } else {
+            body += "Status: " + (base || 'N/A') + "\n\n";
+        }
+
+        // Q5: Specific Requirements
+        body += "--- 5) Specific requirements ---\n";
+        body += (formData.get('specific_requirements') || 'None') + "\n\n";
+
+        // Q6: Vehicles
+        body += "--- 6) Vehicles used ---\n";
+        body += (formData.getAll('vehicle').join(', ') || 'None') + "\n\n";
+
+        // Q7: Repalletised
+        body += "--- 7) Pallets to be repalletised ---\n";
+        let hasPalletData = false;
+        for (let i = 1; i <= 6; i++) {
+            let start = formData.get('start_pallet_' + i);
+            let dest = formData.get('dest_pallet_' + i);
+            if (start || dest) {
+                body += i + ") Start: [" + (start || '...') + "]  >>  Dest: [" + (dest || '...') + "]\n";
+                hasPalletData = true;
+            }
+        }
+        if (!hasPalletData) body += "None\n";
+        body += "\n";
+
+        // Q8: Material
+        body += "--- 8) Pallet Material ---\n";
+        body += (formData.getAll('material').join(', ') || 'None') + "\n\n";
+
+        // Q9: Plastic Details
+        body += "--- 9) Plastic Details ---\n";
+        body += (formData.getAll('plastic_details').join(', ') || 'None') + "\n\n";
+
+        // Q10: Parallel Forks
+        body += "--- 10) Parallel Forks ---\n";
+        body += (formData.get('parallel_forks') || 'N/A') + "\n";
+
+        // Generate Mailto Link
+        const subject = "New Pallet Change Questionnaire - " + (formData.get('contact_company') || 'Client');
+        const emailTo = "m.yehia@alkhatam.com.sa";
+        
+        // Encode for URI
+        const mailtoLink = "mailto:" + emailTo + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+
+        // Open email client
+        window.location.href = mailtoLink;
+    });
+</script>
+
+</body>
+</html>
