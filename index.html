@@ -1,426 +1,824 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pallet Change Questionnaire - PARATUS</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            background-color: #f4f4f4; 
-            padding: 20px; 
-            color: #333; 
-        }
-        .container { 
-            max-width: 900px; 
-            background: #fff; 
-            margin: auto; 
-            padding: 40px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-        }
-        .header { 
-            text-align: center; 
-            border-bottom: 3px solid #d32f2f; 
-            padding-bottom: 20px; 
-            margin-bottom: 30px; 
-        }
-        h1 { 
-            color: #d32f2f; 
-            margin: 0; 
-            letter-spacing: 2px; 
-        }
-        .intro-text {
-            margin-bottom: 20px;
-        }
-        .important-note { 
-            background-color: #fff3f3; 
-            border-left: 5px solid #d32f2f; 
-            padding: 15px; 
-            margin-bottom: 30px; 
-            font-weight: bold; 
-        }
-        .section { 
-            margin-bottom: 30px; 
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        .section:last-of-type {
-            border-bottom: none;
-        }
-        .section-title { 
-            font-weight: bold; 
-            font-size: 1.1em; 
-            margin-bottom: 15px; 
-            display: block; 
-            color: #444; 
-        }
-        .grid-inputs { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-        }
-        .checkbox-group { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 12px; 
-            margin-top: 10px; 
-        }
-        label { 
-            font-size: 14px; 
-            cursor: pointer; 
-        }
-        input[type="text"], input[type="email"], textarea { 
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            box-sizing: border-box; 
-            font-family: inherit;
-        }
-        .inline-input {
-            width: 250px !important;
-            display: inline-block !important;
-            margin-left: 10px;
-        }
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin: 20px 0; 
-            font-size: 14px; 
-        }
-        th, td { 
-            border: 1px solid #ddd; 
-            padding: 12px; 
-            text-align: left; 
-        }
-        th { 
-            background-color: #f9f9f9; 
-            text-align: center;
-        }
-        td.arrow {
-            text-align: center;
-            font-size: 20px;
-            color: #888;
-            background-color: #fafafa;
-        }
-        .contact-info { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 20px; 
-            background: #f9f9f9; 
-            padding: 20px; 
-            border-radius: 5px; 
-        }
-        .btn-submit { 
-            background-color: #d32f2f; 
-            color: white; 
-            padding: 15px 40px; 
-            border: none; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-size: 18px; 
-            display: block; 
-            margin: 30px auto 0; 
-            font-weight: bold; 
-            transition: background 0.3s ease;
-        }
-        .btn-submit:hover { 
-            background-color: #b71c1c; 
-        }
-        .hint { 
-            font-size: 13px; 
-            color: #666; 
-            display: block; 
-            margin-bottom: 10px; 
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pallet Change Questionnaire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- ============================================================
+       EMAIL SETUP — READ BEFORE DEPLOYING TO GITHUB PAGES
+       ============================================================
+       This form uses EmailJS (free, works on static sites / GitHub Pages).
+       
+       STEPS:
+       1. Go to https://www.emailjs.com/ and create a FREE account.
+       2. Add an Email Service (e.g. Gmail or Outlook) → copy SERVICE_ID.
+       3. Create an Email Template → copy TEMPLATE_ID.
+          In the template body, use: {{{message}}}
+          Set "To Email" to:  m.yehia@alkhatam.com.sa
+       4. Go to Account → API Keys → copy PUBLIC_KEY.
+       5. Replace the three placeholders below:
+            YOUR_PUBLIC_KEY
+            YOUR_SERVICE_ID
+            YOUR_TEMPLATE_ID
+       ============================================================ -->
+
+  <style>
+    :root {
+      --bg:       #0d0f14;
+      --surface:  #161a24;
+      --card:     #1e2433;
+      --border:   #2c3347;
+      --accent:   #e8501a;
+      --accent2:  #f0832a;
+      --text:     #eef0f5;
+      --muted:    #8891a8;
+      --success:  #2ecc8a;
+      --radius:   12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1a0a03 0%, #0d0f14 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(232,80,26,.18) 0%, transparent 70%);
+    }
+    .header-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .logo-bar svg { width: 36px; height: 36px; }
+    .brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text);
+    }
+    h1 span { color: var(--accent); }
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 560px;
+    }
+    .important-note {
+      margin-top: 16px;
+      background: rgba(232,80,26,.12);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #f0a07a;
+    }
+    .important-note strong { color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    main { max-width: 820px; margin: 0 auto; padding: 36px 24px 60px; }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 36px;
+    }
+    .prog-step {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      transition: background .4s;
+    }
+    .prog-step.done { background: var(--accent); }
+
+    /* ── SECTIONS ── */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+      transition: border-color .25s;
+    }
+    .section:focus-within { border-color: var(--accent); }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .q-num {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .q-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── INPUTS ── */
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 5px; }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 90px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 540px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ── CHECKBOXES & RADIOS ── */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      user-select: none;
+      font-size: 14px;
+    }
+    .check-item:hover { border-color: var(--accent2); }
+    .check-item input { display: none; }
+    .check-item .box {
+      width: 18px; height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 5px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      transition: all .2s;
+    }
+    .check-item input:checked ~ .box {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .check-item input:checked ~ .box::after {
+      content: '✓';
+      font-size: 11px;
+      color: white;
+      font-weight: bold;
+    }
+    .check-item input:checked ~ span { color: var(--text); }
+    .check-item span { color: var(--muted); transition: color .2s; }
+
+    /* radio as pill */
+    .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .radio-pill {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: border-color .2s;
+      font-size: 14px;
+      user-select: none;
+    }
+    .radio-pill input { display: none; }
+    .radio-pill .dot {
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      transition: all .2s;
+    }
+    .radio-pill input:checked ~ .dot {
+      border-color: var(--accent);
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(232,80,26,.2);
+    }
+    .radio-pill input:checked ~ .dot::after {
+      content: '';
+      width: 6px; height: 6px;
+      background: white;
+      border-radius: 50%;
+    }
+    .radio-pill input:checked ~ span { color: var(--text); }
+    .radio-pill span { color: var(--muted); transition: color .2s; }
+    .radio-pill:has(input:checked) { border-color: var(--accent); }
+
+    /* conditional field */
+    .cond-field {
+      margin-top: 12px;
+      display: none;
+    }
+    .cond-field.visible { display: block; }
+
+    /* ── PALLET TABLE ── */
+    .pallet-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+    }
+    .pallet-table th {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-align: left;
+      padding-bottom: 4px;
+    }
+    .pallet-table th:nth-child(2) { text-align: center; padding: 0 12px; }
+    .pallet-table td:nth-child(2) { text-align: center; color: var(--accent2); font-size: 18px; padding: 0 10px; }
+    .pallet-table td input { margin: 0; }
+
+    /* ── SUBMIT ── */
+    .submit-wrap { margin-top: 36px; text-align: center; }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+      padding: 16px 48px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 6px 24px rgba(232,80,26,.35);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(232,80,26,.45); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--success);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 50px;
+      opacity: 0;
+      transition: all .4s;
+      pointer-events: none;
+      z-index: 999;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast.error { background: #e84040; }
+
+    /* ── INLINE EXTRA INPUT ── */
+    .inline-extra {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .inline-extra input[type="text"] {
+      width: 180px;
+      flex-shrink: 0;
+    }
+
+    /* ── DIVIDER ── */
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>PARATUS</h1>
-        <h2>Pallet change questionnaire</h2>
+<header>
+  <div class="header-inner">
+    <div class="logo-bar">
+      <!-- PARATUS-style double-line icon -->
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="28" height="4" rx="2" fill="#e8501a"/>
+        <rect x="4" y="22" width="28" height="4" rx="2" fill="#f0832a"/>
+      </svg>
+      <span class="brand">Paratus</span>
+    </div>
+    <h1>Pallet Change <span>Questionnaire</span></h1>
+    <p class="subtitle">In order to assess your processes thoroughly and provide you with a suitable quote, please complete the following questionnaire carefully.</p>
+    <p class="important-note"><strong>IMPORTANT:</strong> Please also include photos of your pallets, both loaded and unloaded. You can attach them in an email reply after submission.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- Progress dots -->
+  <div class="progress-wrap" id="progressBar">
+    <div class="prog-step" data-s="1"></div>
+    <div class="prog-step" data-s="2"></div>
+    <div class="prog-step" data-s="3"></div>
+    <div class="prog-step" data-s="4"></div>
+    <div class="prog-step" data-s="5"></div>
+    <div class="prog-step" data-s="6"></div>
+    <div class="prog-step" data-s="7"></div>
+    <div class="prog-step" data-s="8"></div>
+    <div class="prog-step" data-s="9"></div>
+    <div class="prog-step" data-s="10"></div>
+    <div class="prog-step" data-s="contact"></div>
+  </div>
+
+  <form id="palletForm" novalidate>
+
+    <!-- Q1 -->
+    <div class="section" data-section="1">
+      <div class="section-header">
+        <div class="q-num">1</div>
+        <div class="q-title">Pallet details — including the load</div>
+      </div>
+      <div class="grid-2">
+        <div>
+          <label>Total weight (if applicable, from–to)</label>
+          <input type="text" name="q1_weight" placeholder="e.g. 200 – 800 kg"/>
+        </div>
+        <div>
+          <label>Total height (if applicable, from–to)</label>
+          <input type="text" name="q1_height" placeholder="e.g. 1000 – 1500 mm"/>
+        </div>
+        <div>
+          <label>Length (from–to, including any protrusion)</label>
+          <input type="text" name="q1_length" placeholder="e.g. 1000 – 1200 mm"/>
+        </div>
+        <div>
+          <label>Width (from–to, including any protrusion)</label>
+          <input type="text" name="q1_width" placeholder="e.g. 800 – 1000 mm"/>
+        </div>
+      </div>
     </div>
 
-    <p class="intro-text">In order for us to assess your processes thoroughly and provide you with a suitable quote, please complete the following questionnaire carefully and return it to us.</p>
-    
-    <div class="important-note">
-        IMPORTANT: Please also include photos of your pallets, both loaded and unloaded. Thank you.
+    <!-- Q2 -->
+    <div class="section" data-section="2">
+      <div class="section-header">
+        <div class="q-num">2</div>
+        <div class="q-title">What are your pallets packed with?</div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Cardboard boxes"/><span class="box"></span><span>Cardboard boxes</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Barrels"/><span class="box"></span><span>Barrels</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Trays"/><span class="box"></span><span>Trays</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Bottles"/><span class="box"></span><span>Bottles</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Cans"/><span class="box"></span><span>Cans</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Big packs"/><span class="box"></span><span>Big packs</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Sacks"/><span class="box"></span><span>Sacks</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Octabin"/><span class="box"></span><span>Octabin</span></label>
+        <label class="check-item"><input type="checkbox" name="q2_packing" value="Other"/><span class="box"></span><span>Other</span></label>
+      </div>
+      <div class="cond-field" id="q2_other_wrap">
+        <label>Please specify</label>
+        <input type="text" name="q2_packing_other" placeholder="Describe other packing…"/>
+      </div>
     </div>
 
-    <form id="questionnaireForm">
-        
-        <!-- Question 1 -->
-        <div class="section">
-            <span class="section-title">1) Please tell us some details about your pallets, including the load.</span>
-            <div class="grid-inputs">
-                <div>
-                    <label>Total weight (if applicable, from-to):</label>
-                    <input type="text" name="total_weight">
-                </div>
-                <div>
-                    <label>Total height (if applicable, from-to):</label>
-                    <input type="text" name="total_height">
-                </div>
-                <div>
-                    <label>Length (from-to, including any protrusion):</label>
-                    <input type="text" name="length">
-                </div>
-                <div>
-                    <label>Width (from-to, including any protrusion):</label>
-                    <input type="text" name="width">
-                </div>
-            </div>
+    <!-- Q3 -->
+    <div class="section" data-section="3">
+      <div class="section-header">
+        <div class="q-num">3</div>
+        <div class="q-title">Is the load secured to the pallet?</div>
+      </div>
+      <div class="radio-group">
+        <label class="radio-pill"><input type="radio" name="q3_secured" value="yes"/><span class="dot"></span><span>Yes</span></label>
+        <label class="radio-pill"><input type="radio" name="q3_secured" value="no"/><span class="dot"></span><span>No</span></label>
+        <label class="radio-pill"><input type="radio" name="q3_secured" value="sometimes"/><span class="dot"></span><span>Sometimes</span></label>
+      </div>
+      <div class="cond-field" id="q3_method_wrap">
+        <label>How is it secured?</label>
+        <input type="text" name="q3_secured_method" placeholder="e.g. strapping, shrink film…"/>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="section" data-section="4">
+      <div class="section-header">
+        <div class="q-num">4</div>
+        <div class="q-title">Do you place the load on a base (e.g. cardboard)?</div>
+      </div>
+      <div class="radio-group">
+        <label class="radio-pill"><input type="radio" name="q4_base" value="yes"/><span class="dot"></span><span>Yes</span></label>
+        <label class="radio-pill"><input type="radio" name="q4_base" value="no"/><span class="dot"></span><span>No</span></label>
+        <label class="radio-pill"><input type="radio" name="q4_base" value="sometimes"/><span class="dot"></span><span>Sometimes</span></label>
+      </div>
+      <div class="cond-field" id="q4_base_wrap">
+        <label>What base do you use?</label>
+        <input type="text" name="q4_base_detail" placeholder="e.g. cardboard sheet, slip sheet…"/>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="section" data-section="5">
+      <div class="section-header">
+        <div class="q-num">5</div>
+        <div class="q-title">Any specific requirements regarding pallets, goods or packaging?</div>
+      </div>
+      <textarea name="q5_requirements" placeholder="Describe any special requirements here…"></textarea>
+    </div>
+
+    <!-- Q6 -->
+    <div class="section" data-section="6">
+      <div class="section-header">
+        <div class="q-num">6</div>
+        <div class="q-title">Which vehicle do you use?</div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="q6_vehicle" value="Forklift truck"/><span class="box"></span><span>Forklift truck</span></label>
+        <label class="check-item"><input type="checkbox" name="q6_vehicle" value="Walk-behind pallet truck"/><span class="box"></span><span>Walk-behind pallet truck</span></label>
+        <label class="check-item"><input type="checkbox" name="q6_vehicle" value="Electric pallet truck"/><span class="box"></span><span>Electric pallet truck</span></label>
+        <label class="check-item"><input type="checkbox" name="q6_vehicle" value="Push-master forklift"/><span class="box"></span><span>Push-master forklift</span></label>
+        <label class="check-item"><input type="checkbox" name="q6_vehicle" value="Ride-along pallet truck"/><span class="box"></span><span>Ride-along pallet truck</span></label>
+        <label class="check-item"><input type="checkbox" name="q6_vehicle" value="Other"/><span class="box"></span><span>Other</span></label>
+      </div>
+      <div class="cond-field" id="q6_other_wrap">
+        <label>Please specify vehicle</label>
+        <input type="text" name="q6_vehicle_other" placeholder="Describe other vehicle…"/>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="section" data-section="7">
+      <div class="section-header">
+        <div class="q-num">7</div>
+        <div class="q-title">Which pallet(s) should be repalletised — and to which destination? <small style="color:var(--muted);font-weight:400">(dimensions in mm, without load)</small></div>
+      </div>
+      <table class="pallet-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Start Pallet (mm)</th>
+            <th></th>
+            <th>Destination Pallet (mm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;padding-right:10px;">1</td>
+            <td><input type="text" name="q7_start_1" placeholder="e.g. 1200×800×144"/></td>
+            <td>»</td>
+            <td><input type="text" name="q7_dest_1" placeholder="e.g. 1200×1000×150"/></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;padding-right:10px;">2</td>
+            <td><input type="text" name="q7_start_2" placeholder="optional"/></td>
+            <td>»</td>
+            <td><input type="text" name="q7_dest_2" placeholder="optional"/></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;padding-right:10px;">3</td>
+            <td><input type="text" name="q7_start_3" placeholder="optional"/></td>
+            <td>»</td>
+            <td><input type="text" name="q7_dest_3" placeholder="optional"/></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;padding-right:10px;">4</td>
+            <td><input type="text" name="q7_start_4" placeholder="optional"/></td>
+            <td>»</td>
+            <td><input type="text" name="q7_dest_4" placeholder="optional"/></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;padding-right:10px;">5</td>
+            <td><input type="text" name="q7_start_5" placeholder="optional"/></td>
+            <td>»</td>
+            <td><input type="text" name="q7_dest_5" placeholder="optional"/></td>
+          </tr>
+          <tr>
+            <td style="color:var(--muted);font-size:13px;padding-right:10px;">6</td>
+            <td><input type="text" name="q7_start_6" placeholder="optional"/></td>
+            <td>»</td>
+            <td><input type="text" name="q7_dest_6" placeholder="optional"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Q8 -->
+    <div class="section" data-section="8">
+      <div class="section-header">
+        <div class="q-num">8</div>
+        <div class="q-title">What material are the pallets made from?</div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="q8_material" value="Wood"/><span class="box"></span><span>Wood</span></label>
+        <label class="check-item"><input type="checkbox" name="q8_material" value="Pressed wood or cardboard"/><span class="box"></span><span>Pressed wood / cardboard</span></label>
+        <label class="check-item"><input type="checkbox" name="q8_material" value="Plastic"/><span class="box"></span><span>Plastic</span></label>
+        <label class="check-item"><input type="checkbox" name="q8_material" value="Metal (stainless steel, aluminum, steel)"/><span class="box"></span><span>Metal</span></label>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="section" data-section="9" id="q9_section" style="opacity:.45;pointer-events:none;">
+      <div class="section-header">
+        <div class="q-num">9</div>
+        <div class="q-title">If plastic selected — further details</div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" name="q9_plastic" value="Enclosed deck"/><span class="box"></span><span>Enclosed deck</span></label>
+        <label class="check-item"><input type="checkbox" name="q9_plastic" value="Open deck"/><span class="box"></span><span>Open deck</span></label>
+        <label class="check-item"><input type="checkbox" name="q9_plastic" value="Edges on the outside"/><span class="box"></span><span>Edges on the outside</span></label>
+        <label class="check-item"><input type="checkbox" name="q9_plastic" value="Locking cam"/><span class="box"></span><span>Locking cam</span></label>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="section" data-section="10">
+      <div class="section-header">
+        <div class="q-num">10</div>
+        <div class="q-title">Can all start &amp; destination pallets be picked up with an industrial truck so that the cover slats run parallel to the forks?</div>
+      </div>
+      <div class="radio-group">
+        <label class="radio-pill"><input type="radio" name="q10_forks" value="Yes"/><span class="dot"></span><span>Yes</span></label>
+        <label class="radio-pill"><input type="radio" name="q10_forks" value="No"/><span class="dot"></span><span>No</span></label>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section" data-section="contact">
+      <div class="section-header">
+        <div class="q-num" style="background:var(--accent2);">✉</div>
+        <div class="q-title">Contact Person</div>
+      </div>
+      <div class="grid-2">
+        <div>
+          <label>Name *</label>
+          <input type="text" name="contact_name" placeholder="Full name" required/>
         </div>
-
-        <!-- Question 2 -->
-        <div class="section">
-            <span class="section-title">2) What are your pallets packed with?</span>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="packing" value="cardboard boxes"> cardboard boxes</label>
-                <label><input type="checkbox" name="packing" value="barrels"> barrels</label>
-                <label><input type="checkbox" name="packing" value="bottles"> bottles</label>
-                <label><input type="checkbox" name="packing" value="cans"> cans</label>
-                <label><input type="checkbox" name="packing" value="big packs"> big packs</label>
-                <label><input type="checkbox" name="packing" value="trays"> trays</label>
-                <label><input type="checkbox" name="packing" value="sacks"> sacks</label>
-                <label><input type="checkbox" name="packing" value="octabin"> octabin</label>
-            </div>
+        <div>
+          <label>Company *</label>
+          <input type="text" name="contact_company" placeholder="Company name" required/>
         </div>
-
-        <!-- Question 3 -->
-        <div class="section">
-            <span class="section-title">3) Is the load secured to the pallet?</span>
-            <div style="margin-bottom: 8px;">
-                <label><input type="radio" name="secured" value="yes"> yes, through:</label>
-                <input type="text" name="secured_method" class="inline-input">
-            </div>
-            <div style="margin-bottom: 8px;">
-                <label><input type="radio" name="secured" value="no"> no</label>
-            </div>
-            <div>
-                <label><input type="radio" name="secured" value="sometimes"> sometimes</label>
-            </div>
+        <div>
+          <label>E-Mail *</label>
+          <input type="email" name="contact_email" placeholder="your@email.com" required/>
         </div>
-
-        <!-- Question 4 -->
-        <div class="section">
-            <span class="section-title">4) Do you place the load on a base, such as cardboard?</span>
-            <div style="margin-bottom: 8px;">
-                <label><input type="radio" name="base" value="yes"> yes, namely:</label>
-                <input type="text" name="base_details" class="inline-input">
-            </div>
-            <div style="margin-bottom: 8px;">
-                <label><input type="radio" name="base" value="no"> no</label>
-            </div>
-            <div>
-                <label><input type="radio" name="base" value="sometimes"> sometimes</label>
-            </div>
+        <div>
+          <label>Phone</label>
+          <input type="tel" name="contact_phone" placeholder="+966 5X XXX XXXX"/>
         </div>
+      </div>
+    </div>
 
-        <!-- Question 5 -->
-        <div class="section">
-            <span class="section-title">5) Are there any specific requirements regarding the pallets, goods or packaging?</span>
-            <textarea name="specific_requirements" rows="3"></textarea>
-        </div>
+    <div class="submit-wrap">
+      <button type="submit" class="btn-submit" id="submitBtn">
+        Send Questionnaire →
+      </button>
+      <p style="margin-top:14px;font-size:12px;color:var(--muted);">Submitting to m.yehia@alkhatam.com.sa via EmailJS</p>
+    </div>
 
-        <!-- Question 6 -->
-        <div class="section">
-            <span class="section-title">6) Which vehicle do you use?</span>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="vehicle" value="push-master forklift"> push-master forklift</label>
-                <label><input type="checkbox" name="vehicle" value="forklift truck"> forklift truck</label>
-                <label><input type="checkbox" name="vehicle" value="electric pallet truck"> electric pallet truck</label>
-                <label><input type="checkbox" name="vehicle" value="walk-behind pallet truck"> walk-behind pallet truck</label>
-                <label><input type="checkbox" name="vehicle" value="ride-along pallet truck"> ride-along pallet truck</label>
-            </div>
-        </div>
+  </form>
+</main>
 
-        <!-- Question 7 -->
-        <div class="section">
-            <span class="section-title">7) Which pallet(s) should be repalletised and to which destination pallet(s)?</span>
-            <span class="hint">Please enter the correct dimensions (especially the height) of the pallets without load in millimetres here.</span>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 5%;"></th>
-                        <th style="width: 42.5%;">start pallet</th>
-                        <th style="width: 10%;"></th>
-                        <th style="width: 42.5%;">destination pallet</th>
-                    </tr>
-                </thead>
-                <tbody id="palletTableBody">
-                    <!-- Rows generated by JS -->
-                </tbody>
-            </table>
-        </div>
+<div id="toast">✓ Questionnaire sent successfully!</div>
 
-        <!-- Question 8 -->
-        <div class="section">
-            <span class="section-title">8) What material are the pallets made from?</span>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="material" value="wood"> wood</label>
-                <label><input type="checkbox" name="material" value="plastic"> plastic</label>
-                <label><input type="checkbox" name="material" value="pressed wood or cardboard"> pressed wood or cardboard</label>
-                <label><input type="checkbox" name="material" value="metal"> metal (stainless steel, aluminum, steel)</label>
-            </div>
-        </div>
-
-        <!-- Question 9 -->
-        <div class="section">
-            <span class="section-title">9) If you selected 'plastic' in question 8, please provide further details.</span>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="plastic_details" value="enclosed deck"> enclosed deck</label>
-                <label><input type="checkbox" name="plastic_details" value="open deck"> open deck</label>
-                <label><input type="checkbox" name="plastic_details" value="edges on the outside"> edges on the outside</label>
-                <label><input type="checkbox" name="plastic_details" value="locking cam"> locking cam</label>
-            </div>
-        </div>
-
-        <!-- Question 10 -->
-        <div class="section">
-            <span class="section-title">10) Can all start and destination pallets be picked up with an industrial truck in such a way that the cover slats run lengthwise (parallel) to the forks?</span>
-            <label style="margin-right: 20px;"><input type="radio" name="parallel_forks" value="yes"> yes</label>
-            <label><input type="radio" name="parallel_forks" value="no"> no</label>
-        </div>
-
-        <!-- Contact Person -->
-        <div class="section contact-info">
-            <span class="section-title" style="grid-column: 1 / span 2; margin-bottom: 5px;">Contact person</span>
-            <div>
-                <label>Name:</label>
-                <input type="text" name="contact_name" required>
-            </div>
-            <div>
-                <label>Company:</label>
-                <input type="text" name="contact_company">
-            </div>
-            <div>
-                <label>E-Mail:</label>
-                <input type="email" name="contact_email" required>
-            </div>
-            <div>
-                <label>Phone:</label>
-                <input type="text" name="contact_phone">
-            </div>
-        </div>
-
-        <button type="submit" class="btn-submit">Submit Questionnaire</button>
-    </form>
-</div>
-
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-    // Generate the 6 rows for the pallets table
-    document.addEventListener("DOMContentLoaded", function() {
-        const tableBody = document.getElementById('palletTableBody');
-        let rowsHtml = '';
-        
-        for (let i = 1; i <= 6; i++) {
-            rowsHtml += `
-                <tr>
-                    <td style="text-align: right;">${i})</td>
-                    <td><input type="text" name="start_pallet_${i}"></td>
-                    <td class="arrow">»</td>
-                    <td><input type="text" name="dest_pallet_${i}"></td>
-                </tr>
-            `;
-        }
-        tableBody.innerHTML = rowsHtml;
+  // ─── CONFIGURATION ─────────────────────────────────────────
+  // Replace these three values with your own from emailjs.com
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'abc123XYZ'
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_xxxxxx'
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xxxxxx'
+  // ───────────────────────────────────────────────────────────
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  // ── Conditional Q3 ──
+  document.querySelectorAll('input[name="q3_secured"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const wrap = document.getElementById('q3_method_wrap');
+      wrap.classList.toggle('visible', r.value === 'yes' && r.checked);
     });
+  });
 
-    // Handle form submission and format Email
-    document.getElementById('questionnaireForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        
-        let body = "New Pallet Change Questionnaire Submission\n";
-        body += "=========================================\n\n";
-
-        // Contact Information
-        body += "--- Contact Information ---\n";
-        body += "Name: " + (formData.get('contact_name') || 'N/A') + "\n";
-        body += "Company: " + (formData.get('contact_company') || 'N/A') + "\n";
-        body += "Email: " + (formData.get('contact_email') || 'N/A') + "\n";
-        body += "Phone: " + (formData.get('contact_phone') || 'N/A') + "\n\n";
-
-        // Q1: Pallet Details
-        body += "--- 1) Pallet Details ---\n";
-        body += "Total Weight: " + (formData.get('total_weight') || 'N/A') + "\n";
-        body += "Total Height: " + (formData.get('total_height') || 'N/A') + "\n";
-        body += "Length: " + (formData.get('length') || 'N/A') + "\n";
-        body += "Width: " + (formData.get('width') || 'N/A') + "\n\n";
-
-        // Q2: Packing
-        body += "--- 2) Packed with ---\n";
-        body += "Items: " + (formData.getAll('packing').join(', ') || 'None') + "\n\n";
-
-        // Q3: Secured
-        body += "--- 3) Is load secured? ---\n";
-        let secured = formData.get('secured');
-        if (secured === 'yes') {
-            body += "Yes, through: " + formData.get('secured_method') + "\n\n";
-        } else {
-            body += "Status: " + (secured || 'N/A') + "\n\n";
-        }
-
-        // Q4: Base
-        body += "--- 4) Base material ---\n";
-        let base = formData.get('base');
-        if (base === 'yes') {
-            body += "Yes, namely: " + formData.get('base_details') + "\n\n";
-        } else {
-            body += "Status: " + (base || 'N/A') + "\n\n";
-        }
-
-        // Q5: Specific Requirements
-        body += "--- 5) Specific requirements ---\n";
-        body += (formData.get('specific_requirements') || 'None') + "\n\n";
-
-        // Q6: Vehicles
-        body += "--- 6) Vehicles used ---\n";
-        body += (formData.getAll('vehicle').join(', ') || 'None') + "\n\n";
-
-        // Q7: Repalletised
-        body += "--- 7) Pallets to be repalletised ---\n";
-        let hasPalletData = false;
-        for (let i = 1; i <= 6; i++) {
-            let start = formData.get('start_pallet_' + i);
-            let dest = formData.get('dest_pallet_' + i);
-            if (start || dest) {
-                body += i + ") Start: [" + (start || '...') + "]  >>  Dest: [" + (dest || '...') + "]\n";
-                hasPalletData = true;
-            }
-        }
-        if (!hasPalletData) body += "None\n";
-        body += "\n";
-
-        // Q8: Material
-        body += "--- 8) Pallet Material ---\n";
-        body += (formData.getAll('material').join(', ') || 'None') + "\n\n";
-
-        // Q9: Plastic Details
-        body += "--- 9) Plastic Details ---\n";
-        body += (formData.getAll('plastic_details').join(', ') || 'None') + "\n\n";
-
-        // Q10: Parallel Forks
-        body += "--- 10) Parallel Forks ---\n";
-        body += (formData.get('parallel_forks') || 'N/A') + "\n";
-
-        // Generate Mailto Link
-        const subject = "New Pallet Change Questionnaire - " + (formData.get('contact_company') || 'Client');
-        const emailTo = "m.yehia@alkhatam.com.sa";
-        
-        // Encode for URI
-        const mailtoLink = "mailto:" + emailTo + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-        // Open email client
-        window.location.href = mailtoLink;
+  // ── Conditional Q4 ──
+  document.querySelectorAll('input[name="q4_base"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const wrap = document.getElementById('q4_base_wrap');
+      wrap.classList.toggle('visible', r.value === 'yes' && r.checked);
     });
+  });
+
+  // ── Conditional Q2 "Other" ──
+  document.querySelectorAll('input[name="q2_packing"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const anyOther = [...document.querySelectorAll('input[name="q2_packing"]')]
+        .some(c => c.value === 'Other' && c.checked);
+      document.getElementById('q2_other_wrap').classList.toggle('visible', anyOther);
+    });
+  });
+
+  // ── Conditional Q6 "Other" ──
+  document.querySelectorAll('input[name="q6_vehicle"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const anyOther = [...document.querySelectorAll('input[name="q6_vehicle"]')]
+        .some(c => c.value === 'Other' && c.checked);
+      document.getElementById('q6_other_wrap').classList.toggle('visible', anyOther);
+    });
+  });
+
+  // ── Enable Q9 when Plastic checked ──
+  document.querySelectorAll('input[name="q8_material"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const plasticChecked = [...document.querySelectorAll('input[name="q8_material"]')]
+        .some(c => c.value === 'Plastic' && c.checked);
+      const q9 = document.getElementById('q9_section');
+      q9.style.opacity = plasticChecked ? '1' : '.45';
+      q9.style.pointerEvents = plasticChecked ? 'auto' : 'none';
+    });
+  });
+
+  // ── Progress bar ──
+  function updateProgress() {
+    document.querySelectorAll('.section[data-section]').forEach(sec => {
+      const s = sec.dataset.section;
+      const dot = document.querySelector(`.prog-step[data-s="${s}"]`);
+      if (!dot) return;
+      let filled = false;
+      const inputs = sec.querySelectorAll('input, textarea');
+      inputs.forEach(el => {
+        if ((el.type === 'checkbox' || el.type === 'radio') && el.checked) filled = true;
+        if (el.type !== 'checkbox' && el.type !== 'radio' && el.value.trim()) filled = true;
+      });
+      dot.classList.toggle('done', filled);
+    });
+  }
+  document.getElementById('palletForm').addEventListener('input', updateProgress);
+
+  // ── Build message string ──
+  function buildMessage(fd) {
+    const val = k => fd.get(k) || '—';
+    const checkVals = name => {
+      const checked = [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(c => c.value);
+      return checked.length ? checked.join(', ') : '—';
+    };
+
+    const palletRows = [1,2,3,4,5,6].map(i => {
+      const s = val(`q7_start_${i}`);
+      const d = val(`q7_dest_${i}`);
+      if (s === '—' && d === '—') return null;
+      return `  Row ${i}: ${s} → ${d}`;
+    }).filter(Boolean).join('\n') || '  —';
+
+    return `
+PALLET CHANGE QUESTIONNAIRE
+============================
+
+1) PALLET DETAILS (including load)
+   Total weight : ${val('q1_weight')}
+   Total height : ${val('q1_height')}
+   Length       : ${val('q1_length')}
+   Width        : ${val('q1_width')}
+
+2) PALLET PACKING
+   ${checkVals('q2_packing')}
+   ${val('q2_packing_other') !== '—' ? '   Other: ' + val('q2_packing_other') : ''}
+
+3) LOAD SECURED TO PALLET
+   Answer : ${val('q3_secured')}
+   ${val('q3_secured_method') !== '—' ? 'Method: ' + val('q3_secured_method') : ''}
+
+4) LOAD ON BASE
+   Answer : ${val('q4_base')}
+   ${val('q4_base_detail') !== '—' ? 'Detail: ' + val('q4_base_detail') : ''}
+
+5) SPECIFIC REQUIREMENTS
+   ${val('q5_requirements')}
+
+6) VEHICLE TYPE
+   ${checkVals('q6_vehicle')}
+   ${val('q6_vehicle_other') !== '—' ? 'Other: ' + val('q6_vehicle_other') : ''}
+
+7) PALLETS TO REPALLETISE (mm, without load)
+${palletRows}
+
+8) PALLET MATERIAL
+   ${checkVals('q8_material')}
+
+9) PLASTIC DETAILS (if applicable)
+   ${checkVals('q9_plastic')}
+
+10) PALLETS PARALLEL TO FORKS
+   ${val('q10_forks')}
+
+────────────────────────────
+CONTACT PERSON
+   Name    : ${val('contact_name')}
+   Company : ${val('contact_company')}
+   E-Mail  : ${val('contact_email')}
+   Phone   : ${val('contact_phone')}
+`.trim();
+  }
+
+  // ── SUBMIT ──
+  document.getElementById('palletForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name    = this.contact_name.value.trim();
+    const company = this.contact_company.value.trim();
+    const email   = this.contact_email.value.trim();
+
+    if (!name || !company || !email) {
+      showToast('Please fill in Name, Company and E-Mail.', true);
+      return;
+    }
+
+    const fd      = new FormData(this);
+    const message = buildMessage(fd);
+    const btn     = document.getElementById('submitBtn');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name   : name,
+        from_company: company,
+        from_email  : email,
+        message     : message,
+        to_email    : 'm.yehia@alkhatam.com.sa'
+      });
+      showToast('✓ Questionnaire sent successfully!');
+      btn.textContent = '✓ Sent!';
+      btn.style.background = 'var(--success)';
+    } catch (err) {
+      console.error(err);
+      showToast('Error sending. Check EmailJS config.', true);
+      btn.disabled = false;
+      btn.textContent = 'Send Questionnaire →';
+    }
+  });
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = isError ? 'error' : '';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
 </script>
-
 </body>
 </html>
